@@ -40,9 +40,9 @@ for i in range(1,yield_np_mat.shape[0]-1):
         if(yield_np_mat[i][j]!=0.0):
             rs_per_kg = grouped_market[(grouped_market['state']==states[i]) & (grouped_market['commodity'] == crops[j-1])]['modal_pricemean']
             if(rs_per_kg.shape[0]==1):
-                val = ((yield_np_mat[i][j]) * rs_per_kg).to_string
+                val = (yield_np_mat[i][j]) * rs_per_kg.values[0]
             else:
-                val = ((yield_np_mat[i][j]) * std_prices[str(crops[j-1].lower())]).to_string
+                val = (yield_np_mat[i][j]) * std_prices[str(crops[j-1].lower())]
             
             prediction_table.append([states[i], crops[j-1], val])
         else:
