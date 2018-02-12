@@ -43,6 +43,7 @@ crops = list(yield_mat.columns)[1:]
 yield_np_mat = yield_mat.as_matrix()
 
 prediction_table = list()
+prediction_table.append(["state", "crop", "profit"])
 
 for i in range(0,yield_np_mat.shape[0]-1):
     for j in range(1,yield_np_mat.shape[1]):
@@ -52,11 +53,11 @@ for i in range(0,yield_np_mat.shape[0]-1):
             if(rs_per_kg.shape[0]==1):
 		#use market price data
                 diff = ((yield_np_mat[i][j]) * rs_per_kg.values[0]) - coc_dict[str(crops[j-1].lower())]
-                val = diff if diff>0.0 else 0.0
+                val = diff if diff>0.0 else 1.0
             else:
 		#use approximated standard price
                 diff = ((yield_np_mat[i][j]) * std_prices[str(crops[j-1].lower())]) - coc_dict[str(crops[j-1].lower())]
-                val = diff if diff>0.0 else 0.0
+                val = diff if diff>0.0 else 1.0
             
 	    #append all results to a table
             prediction_table.append([states[i], crops[j-1], val])
