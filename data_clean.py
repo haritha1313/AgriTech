@@ -10,9 +10,9 @@ import numpy as np
 import csv
 
 #load csv files
-market_price = pd.read_csv('market.csv')
-standard_price = pd.read_csv('standard.csv')
-coc = pd.read_csv('cost-of-cultivation.csv')
+market_price = pd.read_csv('data/market.csv')
+standard_price = pd.read_csv('data/standard.csv')
+coc = pd.read_csv('data/cost-of-cultivation.csv')
 
 #list of considered crops
 products = ["groundnut", "paddy", "rice", "wheat", "barley", 
@@ -34,7 +34,7 @@ std_prices = dict(zip(standard_price.standard, standard_price.price))
 coc_dict = dict(zip(coc.crop, coc.cost))
 
 #state vs crop matrix
-yield_mat = pd.read_csv('state-crop-yield.csv')
+yield_mat = pd.read_csv('data/state-crop-yield.csv')
 
 #state and crop lists
 states = yield_mat['state']
@@ -69,7 +69,7 @@ for i in range(0,yield_np_mat.shape[0]-1):
 #print(prediction_table)
 
 #save to csv
-with open("state-profit-data.csv", "wb") as f:
+with open("data/state-profit-data.csv", "wb") as f:
     writer = csv.writer(f)
     writer.writerows(prediction_table)
     
